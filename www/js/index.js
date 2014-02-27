@@ -65,7 +65,7 @@ var app = {
         }
 
         function gotFileWriter(writer) {
-            writer.truncate(0); // start fresh
+            // writer.truncate(0); // start fresh
             // writer.seek(writer.length); // to append
             console.log("Writing...");
             writer.onwrite = function(evt) {
