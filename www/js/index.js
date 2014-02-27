@@ -70,13 +70,9 @@ var app = {
             // writer.seek(writer.length); // to append
             console.log("Writing...");
             writer.onwriteend = function(evt) {
+                writer.truncate(writer.position); // clear any leftovers
                 console.log("write successful, now lets see what we wrote...");
                 cssFileEntry.file(readAsText, fail);
-                writer.truncate(writer.position); // clear any leftovers
-                writer.onwriteend = function(evt) {
-                    console.log("Trunicated");
-                    cssFileEntry.file(readAsText, fail);
-                };
             };
             text = window.prompt("What should we write?");
             writer.write(text || "some sample text");
