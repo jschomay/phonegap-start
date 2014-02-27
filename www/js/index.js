@@ -51,6 +51,7 @@ var app = {
     // Use File plugin to create/overwrite a file
     writeFile: function() {
         console.log('Begin file writing...');
+        var cssFileEntry;
 
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
 
@@ -61,6 +62,7 @@ var app = {
 
         function gotFileEntry(fileEntry) {
             console.log("Got file:", fileEntry.name, fileEntry.fullPath);
+            cssFileEntry = fileEntry;
             fileEntry.createWriter(gotFileWriter, fail);
         }
 
@@ -69,9 +71,18 @@ var app = {
             // writer.seek(writer.length); // to append
             console.log("Writing...");
             writer.onwrite = function(evt) {
-                console.log("contents of file now 'some sample text'");
+                console.log("write successful, now lets see what we wrote...");
+                cssFileEntry.file(readAsText, fail);
             };
             writer.write("some sample text");
+        }
+        function readAsText(file) {
+            var reader = new FileReader();
+            reader.onloadend = function(evt) {
+                console.log("Read as text");
+                console.log(evt.target.result);
+            };
+            reader.readAsText(file);
         }
 
         function fail(error) {
