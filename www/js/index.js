@@ -67,20 +67,20 @@ var app = {
         }
 
         function gotFileWriter(writer) {
-            // writer.truncate(0); // start fresh
             // writer.seek(writer.length); // to append
             console.log("Writing...");
             writer.onwrite = function(evt) {
                 console.log("write successful, now lets see what we wrote...");
                 cssFileEntry.file(readAsText, fail);
             };
-            writer.write("some sample text");
+            text = window.prompt("What should we write?");
+            writer.write(text || "some sample text");
+            writer.truncate(writer.position); // clear any leftovers
         }
         function readAsText(file) {
             var reader = new FileReader();
             reader.onloadend = function(evt) {
-                console.log("Read as text");
-                console.log(evt.target.result);
+                console.log("Read as text:",'"'+evt.target.result+'"');
             };
             reader.readAsText(file);
         }
