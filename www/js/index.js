@@ -72,10 +72,14 @@ var app = {
             writer.onwrite = function(evt) {
                 console.log("write successful, now lets see what we wrote...");
                 cssFileEntry.file(readAsText, fail);
+                writer.truncate(writer.position); // clear any leftovers
+                writer.onwrite = function(evt) {
+                    console.log("Trunicated");
+                    cssFileEntry.file(readAsText, fail);
+                };
             };
             text = window.prompt("What should we write?");
             writer.write(text || "some sample text");
-            writer.truncate(writer.position); // clear any leftovers
         }
         function readAsText(file) {
             var reader = new FileReader();
