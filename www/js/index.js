@@ -34,6 +34,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        app.writeFile();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -45,5 +46,35 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+    // Use File plugin to create/overwrite a file
+    writeFile: function() {
+        console.log('Begin file writing...');
+
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+
+        function gotFS(fileSystem) {
+            console.log("Got fileSystem:", fileSystem.name);
+            fileSystem.root.getFile("css-update.css", {create: true, exclusive: false}, gotFileEntry, fail);
+        }
+
+        function gotFileEntry(fileEntry) {
+            console.log("Got file:", fileEntry.name, fileEntry.fullPath);
+            fileEntry.createWriter(gotFileWriter, fail);
+        }
+
+        function gotFileWriter(writer) {
+            writer.truncate(0); // start fresh
+            // writer.seek(writer.length); // to append
+            console.log("Writing...");
+            writer.onwrite = function(evt) {
+                console.log("contents of file now 'some sample text'");
+            };
+            writer.write("some sample text");
+        }
+
+        function fail(error) {
+            console.log(error.code);
+        }
     }
 };
