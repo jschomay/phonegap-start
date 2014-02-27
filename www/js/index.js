@@ -27,6 +27,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener('DOMContentLoaded', this.writeFile, false);
     },
     // deviceready Event Handler
     //
@@ -34,7 +35,6 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        app.writeFile();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
