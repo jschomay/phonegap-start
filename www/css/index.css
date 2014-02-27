@@ -113,3 +113,17 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+.file-test {
+    color: white;
+    margin: 5px;
+    padding: 5px;
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    background: rgba(0,0,225,0.5);
+}
+
+pre {
+    text-align: left;
+    text-transform: none;
+}
