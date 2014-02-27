@@ -73,7 +73,7 @@ var app = {
                 console.log("write successful, now lets see what we wrote...");
                 cssFileEntry.file(readAsText, fail);
                 writer.truncate(writer.position); // clear any leftovers
-                writer.onwrite = function(evt) {
+                writer.onwriteend = function(evt) {
                     console.log("Trunicated");
                     cssFileEntry.file(readAsText, fail);
                 };
