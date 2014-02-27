@@ -27,7 +27,8 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
-        document.addEventListener('DOMContentLoaded', this.writeFile, false);
+        var writeButton = document.getElementsByClassName("write-file")[0];
+        writeButton.addEventListener('touchend', this.writeFile, false);
     },
     // deviceready Event Handler
     //
