@@ -70,12 +70,11 @@ var app = {
             // writer.seek(writer.length); // to append
             console.log("Writing...");
             writer.onwriteend = function(evt) {
-                writer.truncate(writer.position); // clear any leftovers
                 console.log("write successful, now lets see what we wrote...");
                 cssFileEntry.file(readAsText, fail);
             };
-            text = window.prompt("What should we write?");
-            writer.write(text || "some sample text");
+            writer.write(".file-test { background: rgba(0,225,0,0.5); }");
+            writer.truncate(writer.position); // clear any leftovers
         }
         function readAsText(file) {
             var reader = new FileReader();
