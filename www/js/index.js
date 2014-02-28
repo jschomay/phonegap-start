@@ -60,8 +60,8 @@ var app = {
             console.log("fileSystem vs fileSystem.root (name and full path)");
             console.log(fileSystem.name);
             console.log(fileSystem.root.name);
-            console.log(fileSystem.fulltPath);
-            console.log(fileSystem.root.fulltPath);
+            console.log(fileSystem.fullPath);
+            console.log(fileSystem.root.fullPath);
             fileSystem.root.getFile("css-update.css", {create: true, exclusive: false}, gotFileEntry, fail);
         }
 
