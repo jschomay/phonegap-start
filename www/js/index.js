@@ -56,12 +56,7 @@ var app = {
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
 
         function gotFS(fileSystem) {
-            // console.log("Got fileSystem:", fileSystem.name);
-            console.log("fileSystem vs fileSystem.root (name and full path)");
-            console.log(fileSystem.name);
-            console.log(fileSystem.root.name);
-            console.log(fileSystem.fullPath);
-            console.log(fileSystem.root.fullPath);
+            console.log("Got fileSystem:", fileSystem.name);
             fileSystem.root.getFile("css-update.css", {create: true, exclusive: false}, gotFileEntry, fail);
         }
 
